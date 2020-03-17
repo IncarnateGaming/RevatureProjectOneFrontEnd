@@ -1,9 +1,24 @@
-<h1>{{title}}</h1>
-<nav>
-    <a routerLink="/dashboard">Dashboard</a>
-    <a routerLink="/heroes">Heroes</a>
-</nav>
-<div class="container">
-    <router-outlet></router-outlet>
+<div class="bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-primary dark-bg d-flex flex-column">
+        <h1 class="text-light">{{title}}</h1>
+        <button id="nav-expand-btn" class="btn-light ml-auto">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="text-light ml-auto" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto my-3">
+                <li class="nav-item ml-auto">
+                    <a routerLink="/dashboard"><button class="btn-light">Dashboard</button></a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto my-3">
+                <li class="nav-item ml-auto">
+                    <a routerLink="/heroes"><button class="btn-light">Heroes</button></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <router-outlet></router-outlet>
+    </div>
+    <app-messages></app-messages>
 </div>
-<app-messages></app-messages>

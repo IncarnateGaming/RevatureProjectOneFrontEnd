@@ -1,0 +1,11 @@
+@use 'sass:map';
+@import 'style/incarnateColors.scss';
+#navbarSupportedContent{
+    display:none;
+}
+#navbarSupportedContent.expanded{
+    display:block;
+}
+.dark-bg a{
+    color: var(--light);
+}
