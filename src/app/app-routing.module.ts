@@ -22,6 +22,7 @@ const routes: Routes = [
   {path: 'ticket/edit/:id', component: EditTicketComponent},
   {path: 'ticket/manage/:id', component: ManageTicketComponent},
   {path: 'pokemon/list', component: PokedexComponent},
+  {path: 'pokemon/list/:offset', component: PokedexComponent},
   {path: 'pokemon/:id', component: PokebadgeComponent},
 ]
 

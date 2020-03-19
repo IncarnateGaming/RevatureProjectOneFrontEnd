@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 import { AppComponent } from './app.component';
 import { HeroesComponent } from './heroes/components/heroes/heroes.component';
@@ -14,6 +15,8 @@ import { TicketsComponent } from './ers/components/tickets/tickets.component';
 import { NewTicketComponent } from './ers/components/new-ticket/new-ticket.component';
 import { EditTicketComponent } from './ers/components/edit-ticket/edit-ticket.component';
 import { ManageTicketComponent } from './ers/components/manage-ticket/manage-ticket.component';
+import { PokebadgeComponent } from './pokemon/components/pokebadge/pokebadge.component';
+import { PokedexComponent } from './pokemon/components/pokedex/pokedex.component';
 
 @NgModule({
   declarations: [
@@ -26,9 +29,12 @@ import { ManageTicketComponent } from './ers/components/manage-ticket/manage-tic
     TicketsComponent,
     NewTicketComponent,
     EditTicketComponent,
-    ManageTicketComponent
+    ManageTicketComponent,
+    PokebadgeComponent,
+    PokedexComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,

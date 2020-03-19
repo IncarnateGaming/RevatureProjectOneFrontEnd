@@ -1,4 +1,9 @@
-<h1 class="text-center"><strong>{{id}}</strong> {{name}}</h1>
-<a [href]="image">
-    <img [src]="image"/>
-</a>
+<!-- <fieldset name="pokemon">Pokemon ID</fieldset>
+<input id="pokeInput" name="pokemon" type="text" [(ngModel)]="id"/>
+<button (click)="myFunc()">Retrieve Pokemon</button> -->
+<div *ngIf="pokemonObs | async as pokemon;">
+    <h1 class="text-center"><strong>{{pokemon.id}}</strong> {{pokemon.name}}</h1>
+    <a [href]="pokemon.sprites.front_default">
+        <img [src]="pokemon.sprites.front_default"/>
+    </a>
+</div>

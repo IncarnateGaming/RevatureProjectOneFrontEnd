@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {HttpClient, HttpHeaders } from '@angular/common/http';
 import { PokecallService } from '../../services/pokecall.service';
 import {ActivatedRoute} from '@angular/router';
+import {Pokemon} from '../../models/pokemon';
+import { FormControl } from '@angular/forms';
+import {Observable, of} from 'rxjs';
 
 @Component({
   selector: 'app-pokebadge',
@@ -9,7 +12,8 @@ import {ActivatedRoute} from '@angular/router';
   styleUrls: ['./pokebadge.component.sass']
 })
 export class PokebadgeComponent implements OnInit {
-  pokemon;
+  pokemonObs: Observable<Pokemon>;
+  pokemon: Pokemon;
   id: number;
   name: string;
   image: string;
@@ -23,16 +27,22 @@ export class PokebadgeComponent implements OnInit {
   ngOnInit(): void {
     this.getPokemon();
   }
+  myFunc(){
+    this.pokeCall(this.id);
+  }
   getPokemon(): void{
     const urlPart = this.route.snapshot.paramMap.get('id');
-    this.pokecallService.getPokemon(urlPart)
-      .subscribe(result => {
-        this.pokemon = result;
-        console.log(result);
-        this.id = result.id;
-        this.name = result.name;
-        this.image = result.sprites.front_default;
-      });
+    this.pokeCall(urlPart);
+  }
+  pokeCall(urlPart){
+    this.pokemonObs = this.pokecallService.getPokemon(urlPart);
+      // .subscribe(result => {
+      //   this.pokemon = result;
+      //   console.log(result);
+      //   this.id = result.id;
+      //   this.name = result.name;
+      //   this.image = result.sprites.front_default;
+      // });
   }
 
 }

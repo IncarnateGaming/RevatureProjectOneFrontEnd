@@ -1,18 +1,21 @@
 import { Injectable } from '@angular/core';
-import {AppModule} from '../../app.module';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {User} from '../models/user';
+import {Observable, of} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
   configUrl='http://localhost:8080/PhilipLawrence0Bank-Maven/Login';
-  constructor() { }
+  constructor(
+    private http: HttpClient,
+  ) { }
   sendLogin(username: string, password: string): Observable<User>{
-    const loginTemplate{
+    const loginTemplate = {
       username: username,
       password: password,
     }
-    return this.http.post<LoginTemplate>(this.configUrl,loginTemplate);
+    return this.http.post<User>(this.configUrl,loginTemplate);
   }
 }
