@@ -3,7 +3,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { HeroesComponent } from './heroes/heroes/heroes.component';
+import { HeroesComponent } from './heroes/components/heroes/heroes.component';
 import {FormsModule} from '@angular/forms';
 import { HeroDetailComponent } from './heroes/components/hero-detail/hero-detail.component';
 import { MessagesComponent } from './ers/components/messages/messages.component';
