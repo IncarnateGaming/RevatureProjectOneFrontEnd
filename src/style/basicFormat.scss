@@ -1,11 +1,49 @@
 @use 'sass:map';
 @import 'style/incarnateColors.scss';
+.headerBar{
+    width: calc(100vw - 2rem);
+}
+#titleMain{
+    display:none;
+}
+.outer-container{
+    height:100vh;
+}
 #navbarSupportedContent{
     display:none;
+    margin-left:auto;
 }
 #navbarSupportedContent.expanded{
     display:block;
 }
 .dark-bg a{
     color: var(--light);
+}
+.ers-flex-grow{
+    flex:1;
+}
+//Responsive parts
+@media (min-width: 700px) and (orientation:landscape){
+    #titleAbbreviation{
+        display:none;
+    }
+    #titleMain{
+        display:block;
+    }
+    #nav-expand-btn{
+        display:none
+    }
+    #navbarSupportedContent{
+        display:flex;
+        flex-direction: row;
+        margin-left: unset;
+        margin-right:auto;
+        button{
+            margin-left:0.2em;
+            margin-right:0.2em;
+        }
+    }
+    #navbarSupportedContent.expanded{
+        display:flex;
+    }
 }

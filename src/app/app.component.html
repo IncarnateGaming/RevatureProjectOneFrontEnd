@@ -1,10 +1,13 @@
-<div class="bg-light">
+<div class="bg-light d-flex flex-column outer-container">
     <nav class="navbar navbar-expand-lg navbar-light bg-primary dark-bg d-flex flex-column">
-        <h1 class="text-light">{{title}}</h1>
-        <button id="nav-expand-btn" class="btn-light ml-auto">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="text-light ml-auto" id="navbarSupportedContent">
+        <h1 id="titleMain" class="text-light">{{title}}</h1>
+        <div class="d-flex headerBar">
+            <h1 id="titleAbbreviation" class="text-light mr-auto">{{titleAbbreviation}}</h1>
+            <button id="nav-expand-btn" class="btn-light">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="text-light" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto my-3">
                 <li class="nav-item ml-auto">
                     <a routerLink="/dashboard"><button class="btn-light">Dashboard</button></a>
@@ -15,10 +18,28 @@
                     <a routerLink="/heroes"><button class="btn-light">Heroes</button></a>
                 </li>
             </ul>
+            <ul class="navbar-nav ml-auto my-3">
+                <li class="nav-item ml-auto">
+                    <a routerLink="/ticket/list"><button class="btn-light">List Tickets</button></a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto my-3">
+                <li class="nav-item ml-auto">
+                    <a routerLink="/ticket/new"><button class="btn-light">New Ticket</button></a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto my-3">
+                <li class="nav-item ml-auto">
+                    <a routerLink="/login"><button class="btn-light">login</button></a>
+                </li>
+            </ul>
         </div>
     </nav>
-    <div class="container">
+    <div class="container ers-flex-grow">
         <router-outlet></router-outlet>
     </div>
     <app-messages></app-messages>
+    <footer class="bg-primary">
+        <div class="text-center text-light">© 2020 Revature. Designed By Philip Lawrence</div>
+    </footer>
 </div>
