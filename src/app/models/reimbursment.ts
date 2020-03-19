@@ -1,6 +1,6 @@
-import { reimbursmentStatus } from './reimbursmentStatus';
-import { reimbursmentType } from './reimbursmentType';
-import { user } from './user';
+import { ReimbursmentStatus } from './reimbursmentStatus';
+import { ReimbursmentType } from './reimbursmentType';
+import { User } from './user';
 
 export interface reimbursment{
     id: number,
@@ -9,8 +9,8 @@ export interface reimbursment{
     submitted: Date,
     resolved: Date,
     receipt: ImageBitmap,
-    author: user,
-    resolver: user,
-    status: reimbursmentStatus,
-    type: reimbursmentType,
+    author: User,
+    resolver: User,
+    status: ReimbursmentStatus,
+    type: ReimbursmentType,
 }

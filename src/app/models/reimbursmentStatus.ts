@@ -1,4 +1,4 @@
-export interface reimbursmentStatus{
+export interface ReimbursmentStatus{
     id: number,
     status: string,
 }
