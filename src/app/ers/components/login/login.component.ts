@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { LoginTemplate } from 'src/app/templates/loginTemplate';
 
 @Component({
   selector: 'app-login',

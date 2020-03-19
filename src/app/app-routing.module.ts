@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {HeroesComponent} from './components/heroes/heroes.component';
-import {HeroDetailComponent} from './components/hero-detail/hero-detail.component';
-import {DashboardComponent} from './components/dashboard/dashboard.component';
-import {LoginComponent} from './components/login/login.component';
-import {EditTicketComponent} from './components/edit-ticket/edit-ticket.component';
-import {ManageTicketComponent} from './components/manage-ticket/manage-ticket.component';
-import {NewTicketComponent} from './components/new-ticket/new-ticket.component';
-import {TicketsComponent} from './components/tickets/tickets.component';
+import {HeroesComponent} from './heroes/heroes/heroes.component';
+import {HeroDetailComponent} from './heroes/components/hero-detail/hero-detail.component';
+import {DashboardComponent} from './heroes/components/dashboard/dashboard.component';
+import {LoginComponent} from './ers/components/login/login.component';
+import {EditTicketComponent} from './ers/components/edit-ticket/edit-ticket.component';
+import {ManageTicketComponent} from './ers/components/manage-ticket/manage-ticket.component';
+import {NewTicketComponent} from './ers/components/new-ticket/new-ticket.component';
+import {TicketsComponent} from './ers/components/tickets/tickets.component';
 
 const routes: Routes = [
   {path: '', component: DashboardComponent, pathMatch: 'full'},

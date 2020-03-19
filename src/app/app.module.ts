@@ -3,17 +3,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { HeroesComponent } from './components/heroes/heroes.component';
+import { HeroesComponent } from './heroes/heroes/heroes.component';
 import {FormsModule} from '@angular/forms';
-import { HeroDetailComponent } from './components/hero-detail/hero-detail.component';
-import { MessagesComponent } from './components/messages/messages.component';
+import { HeroDetailComponent } from './heroes/components/hero-detail/hero-detail.component';
+import { MessagesComponent } from './ers/components/messages/messages.component';
 import { AppRoutingModule } from './app-routing.module';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { LoginComponent } from './components/login/login.component';
-import { TicketsComponent } from './components/tickets/tickets.component';
-import { NewTicketComponent } from './components/new-ticket/new-ticket.component';
-import { EditTicketComponent } from './components/edit-ticket/edit-ticket.component';
-import { ManageTicketComponent } from './components/manage-ticket/manage-ticket.component';
+import { DashboardComponent } from './heroes/components/dashboard/dashboard.component';
+import { LoginComponent } from './ers/components/login/login.component';
+import { TicketsComponent } from './ers/components/tickets/tickets.component';
+import { NewTicketComponent } from './ers/components/new-ticket/new-ticket.component';
+import { EditTicketComponent } from './ers/components/edit-ticket/edit-ticket.component';
+import { ManageTicketComponent } from './ers/components/manage-ticket/manage-ticket.component';
 
 @NgModule({
   declarations: [
