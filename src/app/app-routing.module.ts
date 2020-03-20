@@ -8,11 +8,13 @@ import {EditTicketComponent} from './ers/components/edit-ticket/edit-ticket.comp
 import {ManageTicketComponent} from './ers/components/manage-ticket/manage-ticket.component';
 import {NewTicketComponent} from './ers/components/new-ticket/new-ticket.component';
 import {TicketsComponent} from './ers/components/tickets/tickets.component';
+import { CreateAccountComponent } from './ers/components/create-account/create-account.component';
 import { PokedexComponent } from './pokemon/components/pokedex/pokedex.component';
 import { PokebadgeComponent } from './pokemon/components/pokebadge/pokebadge.component';
 
 const routes: Routes = [
   {path: '', component: DashboardComponent, pathMatch: 'full'},
+  {path: 'newaccount', component: CreateAccountComponent},
   {path: 'dashboard', component: DashboardComponent},
   {path: 'detail/:id', component: HeroDetailComponent},
   {path: 'heroes', component: HeroesComponent},

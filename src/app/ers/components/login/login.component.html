@@ -1,9 +1,4 @@
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
-<!-- <form> -->
-    <!-- <div class="form-group">
-        <label for="emailInput">Email Address</label>
-        <input type="email" class="form-control" id="emailInput"/>
-    </div> -->
     <div class="form-group">
         <label for="usernameInput">Username</label>
         <input type="text" class="form-control" id="usernameInput"
@@ -16,6 +11,5 @@
          formControlName="password"
          />
     </div>
-    <!-- <button [disabled]="isUnchanged">Submit</button> -->
     <button class="button" type="submit">Submit</button>
 </form>
