@@ -20,10 +20,12 @@ const routes: Routes = [
   {path: 'detail/:id', component: HeroDetailComponent},
   {path: 'heroes', component: HeroesComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'ticket/list', component: TicketsComponent},
-  {path: 'ticket/new', component: NewTicketComponent},
-  {path: 'ticket/edit/:id', component: EditTicketComponent},
-  {path: 'ticket/manage/:id', component: ManageTicketComponent},
+  {path: 'ticket', component: TicketsComponent, children:[
+    {path: 'list', component: TicketsComponent},
+    {path: 'new', component: NewTicketComponent},
+    {path: 'edit/:id', component: EditTicketComponent},
+    {path: 'manage/:id', component: ManageTicketComponent}
+  ]},
   {path: 'pokemon/list', component: PokedexComponent},
   {path: 'pokemon/list/:offset', component: PokedexComponent},
   {path: 'pokemon/:id', component: PokebadgeComponent},
