@@ -16,6 +16,7 @@ import { NewTicketComponent } from './ers/components/new-ticket/new-ticket.compo
 import { EditTicketComponent } from './ers/components/edit-ticket/edit-ticket.component';
 import { ManageTicketComponent } from './ers/components/manage-ticket/manage-ticket.component';
 import { CreateAccountComponent } from './ers/components/create-account/create-account.component';
+import { PageNotFoundComponent } from './ers/components/page-not-found/page-not-found.component';
 import { PokebadgeComponent } from './pokemon/components/pokebadge/pokebadge.component';
 import { PokedexComponent } from './pokemon/components/pokedex/pokedex.component';
 
@@ -32,6 +33,7 @@ import { PokedexComponent } from './pokemon/components/pokedex/pokedex.component
     NewTicketComponent,
     EditTicketComponent,
     ManageTicketComponent,
+    PageNotFoundComponent,
     PokebadgeComponent,
     PokedexComponent
   ],

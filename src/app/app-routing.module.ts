@@ -11,6 +11,7 @@ import {TicketsComponent} from './ers/components/tickets/tickets.component';
 import { CreateAccountComponent } from './ers/components/create-account/create-account.component';
 import { PokedexComponent } from './pokemon/components/pokedex/pokedex.component';
 import { PokebadgeComponent } from './pokemon/components/pokebadge/pokebadge.component';
+import { PageNotFoundComponent } from './ers/components/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   {path: '', component: DashboardComponent, pathMatch: 'full'},
@@ -26,6 +27,7 @@ const routes: Routes = [
   {path: 'pokemon/list', component: PokedexComponent},
   {path: 'pokemon/list/:offset', component: PokedexComponent},
   {path: 'pokemon/:id', component: PokebadgeComponent},
+  {path: '**', component: PageNotFoundComponent},
 ]
 
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { NewAccountService } from '../../services/new-account.service';
 
@@ -10,6 +10,9 @@ import { NewAccountService } from '../../services/new-account.service';
 export class CreateAccountComponent implements OnInit {
 
   newAccountForm;
+  @Input() pass;
+  @Input() pass2;
+
   constructor(
     private formBuilder: FormBuilder,
     private newAccount: NewAccountService, 
@@ -25,15 +28,18 @@ export class CreateAccountComponent implements OnInit {
   ngOnInit(): void {
   }
   onSubmit(newAccountForm){
+    console.log(newAccountForm);
     if(newAccountForm.password === newAccountForm.password2){
-      let result = this.newAccount.create(this.newAccountForm.username, this.newAccountForm.password, this.newAccountForm.email)
+      let result = this.newAccount.create(newAccountForm.username, newAccountForm.password, newAccountForm.email)
         .subscribe(result => {
           console.log(result);
         });
     }else{
       alert('Passwords do not match!');
-      // document.getElementById('passwordInput').value = '';
-      // document.getElementById('passwordInput2').value = '';
+      this.pass = document.getElementById('passwordInput');
+      this.pass.value = '';
+      this.pass2 = document.getElementById('passwordInput2');
+      this.pass2.value = '';
     }
   }
 
