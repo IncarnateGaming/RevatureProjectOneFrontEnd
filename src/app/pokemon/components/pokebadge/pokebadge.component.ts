@@ -17,6 +17,10 @@ export class PokebadgeComponent implements OnInit {
   id: number;
   name: string;
   image: string;
+  pStyle: any = {
+    color: 'darkblue',
+    backgroundColor: 'yellow',
+  }
 
   constructor(
     private route: ActivatedRoute,
@@ -43,6 +47,19 @@ export class PokebadgeComponent implements OnInit {
       //   this.name = result.name;
       //   this.image = result.sprites.front_default;
       // });
+  }
+  changeStyle():void{
+    if(this.pStyle.color == 'darkblue'){
+      this.pStyle = {
+        color:'green',
+        backgroundColor:'white',
+      }
+    }else{
+      this.pStyle = {
+        color: 'darkblue',
+        backgroundColor: 'yellow',
+      }
+    }
   }
 
 }
