@@ -26,12 +26,12 @@ export class TicketsComponent implements OnInit {
     this.storage.get<User>('userLogin').subscribe((res:User) =>{
       let employee: UserRole = {"id":1,"role":"Employee"};
       let filterBy: User = new User("bugsBunny","****","Bugs","Bunny","bugs@gmail.com",employee);
-      filterBy.id = 60;
+      filterBy.id = 3;
       let status: ReimbursmentStatus = new ReimbursmentStatus("Approved");
       status.id = 2;
-      this.listTicketsService.sendListRequest(res, filterBy, 30, 10, status).subscribe((result) =>{
-        console.log(result);
-      })
+      this.tickets = 
+      this.listTicketsService.sendListRequest(res, filterBy, 10, 10, status);
+        // .subscribe((result)=>{console.log(result)});
     });
   }
 

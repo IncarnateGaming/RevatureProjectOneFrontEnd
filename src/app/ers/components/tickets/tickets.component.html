@@ -1,1 +1,43 @@
-<p>tickets works!</p>
+<form>
+
+</form>
+<table class="table table-striped">
+    <caption>Reimbursments</caption>
+    <thead class="thead-dark">
+        <tr>
+            <th>ID</th>
+            <th>Amount</th>
+            <th>Description</th>
+            <th>Submitted</th>
+            <th>Resolved</th>
+            <th>Author</th>
+            <th>Resolver</th>
+            <th>Status</th>
+            <th>Type</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let ticket of tickets | async">
+            <td>{{ticket.id}}</td>
+            <td>{{ticket.amount | currency : USD}}</td>
+            <td>{{ticket.description}}</td>
+            <td>{{ticket.submitted | date : medium}}</td>
+            <td>{{ticket.resolved | date : medium}}</td>
+            <td>
+                <span *ngIf="ticket.author">
+                    <div *ngIf="ticket.author.firstName; then firstNameBlock else usernameBlock"></div>
+                    <ng-template #firstNameBlock>{{ticket.author.firstName}} {{ticket.author.lastName}}</ng-template>
+                    <ng-template #usernameBlock>{{ticket.author.username}}</ng-template>
+                </span></td>
+            <td><span *ngIf="ticket.resolver">
+                    <div *ngIf="ticket.resolver.firstName; then resFirstNameBlock else resUsernameBlock"></div>
+                    <ng-template #resFirstNameBlock>{{ticket.resolver.firstName}} {{ticket.resolver.lastName}}</ng-template>
+                    <ng-template #resUsernameBlock>{{ticket.resolver.username}}</ng-template>
+                </span></td>
+            <td><span *ngIf="ticket.status">{{ticket.status.status}}</span></td>
+            <td><span *ngIf="ticket.type">{{ticket.type.type}}</span></td>
+        </tr>
+    </tbody>
+</table>
+<!-- <div *ngIf="tickets | async as ticket;">
+</div> -->
