@@ -7,6 +7,7 @@ import { StorageMap } from '@ngx-pwa/local-storage';
 import { User } from '../../models/user';
 import { UserRole } from '../../models/userRole';
 import { ReimbursmentStatus } from '../../models/reimbursmentStatus';
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'app-tickets',
@@ -35,6 +36,7 @@ export class TicketsComponent implements OnInit {
       status.id = 2;
       this.tickets = 
         this.listTicketsService.sendListRequest(res, filterBy, 10, 0, status);
+        let test = AppComponent.getTitle();
         // .subscribe((result)=>{console.log(result)});
     });
   }

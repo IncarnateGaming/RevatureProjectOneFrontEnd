@@ -8,7 +8,7 @@ import {Observable, of} from 'rxjs';
   providedIn: 'root'
 })
 export class ListUsersService {
-  configUrl='http://localhost:8080/PhilipLawrence0Bank-Maven/UserList';
+  configUrl='http://localhost:8080/PhilipLawrence1Expenses/UserList';
   constructor(
     private http: HttpClient,
     private storage: StorageMap,
