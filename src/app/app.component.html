@@ -33,6 +33,11 @@
                     <a routerLink="/login"><button class="btn-light">login</button></a>
                 </li>
             </ul>
+            <ul class="navbar-nav ml-auto my-3" *ngIf="user">
+                <li class="nav-item ml-auto">
+                    <button class="btn-light" (click)="logout()">logout</button>
+                </li>
+            </ul>
             <ul class="navbar-nav ml-auto my-3">
                 <li class="nav-item ml-auto">
                     <a routerLink="/newaccount"><button class="btn-light">New Account</button></a>

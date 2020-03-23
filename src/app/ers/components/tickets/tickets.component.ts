@@ -15,8 +15,12 @@ import { AppComponent } from 'src/app/app.component';
   styleUrls: ['./tickets.component.sass']
 })
 export class TicketsComponent implements OnInit {
-  tickets : Observable<Reimbursment[]>;
-  users : Observable<User[]>;
+  user: Observable<User>;
+  tickets: Observable<Reimbursment[]>;
+  users: Observable<User[]>;
+  filterBy: string;
+  limit = 20;
+  offset = 0;
   constructor(
     private listTicketsService: ListTicketsService,
     private storage: StorageMap,
@@ -24,27 +28,33 @@ export class TicketsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    // @ts-ignore
+    this.user = this.storage.get<User>('userLogin');
     this.callReimbursments();
     this.callUsers();
   }
-  callReimbursments(){
-    this.storage.get<User>('userLogin').subscribe((res:User) =>{
-      let employee: UserRole = {"id":1,"role":"Employee"};
-      let filterBy: User = new User("bugsBunny","****","Bugs","Bunny","bugs@gmail.com",employee);
-      filterBy.id = 3;
-      let status: ReimbursmentStatus = new ReimbursmentStatus("Approved");
+  callReimbursments() {
+    this.storage.get<User>('userLogin').subscribe((res: User) => {
+      // const employee: UserRole = {id: 1, role: 'Employee'};
+      // const filterBy: User = new User('bugsBunny', '****', 'Bugs', 'Bunny', 'bugs@gmail.com', employee);
+      // filterBy.id = 3;
+      const status: ReimbursmentStatus = new ReimbursmentStatus('Approved');
       status.id = 2;
-      this.tickets = 
-        this.listTicketsService.sendListRequest(res, filterBy, 10, 0, status);
-        let test = AppComponent.getTitle();
+      let filterByUser: User;
+      if (this.filterBy !== undefined){
+        filterByUser = JSON.parse(this.filterBy);
+      }
+      console.log(res, filterByUser);
+      this.tickets =
+        this.listTicketsService.sendListRequest(res, filterByUser, this.limit, this.offset, status);
         // .subscribe((result)=>{console.log(result)});
     });
   }
-  callUsers(){
-    this.storage.get<User>('userLogin').subscribe((res:User) =>{
-      if(res.role && res.role.role == "Admin"){
-        this.users = 
-          this.listUsersService.sendListRequest(res,20,0);
+  callUsers() {
+    this.storage.get<User>('userLogin').subscribe((res: User) => {
+      if (res.role && res.role.role === 'Admin') {
+        this.users =
+          this.listUsersService.sendListRequest(res, 20, 0);
       }
     });
   }

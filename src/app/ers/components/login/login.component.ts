@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit {
     let result = this.login.sendLogin(loginTemplate.username, loginTemplate.password)
       .subscribe(result => {
         this.storage.set('userLogin',result).subscribe(()=>{});
+        console.log(result);
         // this.storage.get('userLogin').subscribe((res) =>{console.log(res);});
       });
   }
