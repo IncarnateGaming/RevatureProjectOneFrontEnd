@@ -3,6 +3,7 @@
         <div class="form-group">
             <label for="user">Filter By User</label>
             <select class="form-control" id="user" [(ngModel)]="filterBy" name="user">
+                <option value=""></option>
                 <option *ngFor="let user of users | async" [value]="user | json">{{user.username}}</option>
             </select>
         </div>
@@ -14,6 +15,13 @@
     <div class="form-group">
         <label for="offset"># of offset</label>
         <input type="number" class="form-control" id="offset" [(ngModel)]="offset" name="offset"/>
+    </div>
+    <div class="form-group">
+        <label for="status">Filter By Status</label>
+        <select class="form-control" id="status" [(ngModel)]="status" name="status">
+            <option value=""></option>
+            <option *ngFor="let stat of reimbursmentStatuses | async" [value]="stat | json">{{stat.status}}</option>
+        </select>
     </div>
 </form>
 <button class="btn btn-primary mb-2" (click)="callReimbursments()">Refresh</button>

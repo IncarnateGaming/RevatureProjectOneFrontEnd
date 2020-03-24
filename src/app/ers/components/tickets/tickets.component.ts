@@ -8,6 +8,7 @@ import { User } from '../../models/user';
 import { UserRole } from '../../models/userRole';
 import { ReimbursmentStatus } from '../../models/reimbursmentStatus';
 import { AppComponent } from 'src/app/app.component';
+import { ListReimbursmentStatusesService } from '../../services/list-reimbursment-statuses.service';
 
 @Component({
   selector: 'app-tickets',
@@ -18,13 +19,16 @@ export class TicketsComponent implements OnInit {
   user: Observable<User>;
   tickets: Observable<Reimbursment[]>;
   users: Observable<User[]>;
+  reimbursmentStatuses: Observable<ReimbursmentStatus[]>;
   filterBy: string;
+  status: string;
   limit = 20;
   offset = 0;
   constructor(
     private listTicketsService: ListTicketsService,
     private storage: StorageMap,
     private listUsersService: ListUsersService,
+    private listReimbursmentStatusesService: ListReimbursmentStatusesService,
   ) { }
 
   ngOnInit(): void {
@@ -32,22 +36,23 @@ export class TicketsComponent implements OnInit {
     this.user = this.storage.get<User>('userLogin');
     this.callReimbursments();
     this.callUsers();
+    this.callReimbursmentStatuses();
+  }
+  callReimbursmentStatuses(){
+    this.reimbursmentStatuses = this.listReimbursmentStatusesService.sendListRequest();
   }
   callReimbursments() {
     this.storage.get<User>('userLogin').subscribe((res: User) => {
-      // const employee: UserRole = {id: 1, role: 'Employee'};
-      // const filterBy: User = new User('bugsBunny', '****', 'Bugs', 'Bunny', 'bugs@gmail.com', employee);
-      // filterBy.id = 3;
-      const status: ReimbursmentStatus = new ReimbursmentStatus('Approved');
-      status.id = 2;
-      let filterByUser: User;
-      if (this.filterBy !== undefined){
+      let filterByUser: User = new User("","","","","",{"id":0,"role":""});
+      if (this.filterBy !== undefined && this.filterBy !== ""){
         filterByUser = JSON.parse(this.filterBy);
       }
-      console.log(res, filterByUser);
+      let status: ReimbursmentStatus = new ReimbursmentStatus("");
+      if(this.status !== undefined && this.status !== ""){
+        status = JSON.parse(this.status);
+      }
       this.tickets =
         this.listTicketsService.sendListRequest(res, filterByUser, this.limit, this.offset, status);
-        // .subscribe((result)=>{console.log(result)});
     });
   }
   callUsers() {
