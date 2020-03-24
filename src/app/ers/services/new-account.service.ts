@@ -17,7 +17,6 @@ export class NewAccountService {
       password: password,
       email: email,
     }
-    console.log(newAccountTemplate);
     return this.http.post<User>(this.configUrl,newAccountTemplate);
   }
 }

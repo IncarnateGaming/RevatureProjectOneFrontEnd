@@ -5,9 +5,7 @@ import { ListTicketsService } from '../../services/list-tickets.service';
 import { ListUsersService } from '../../services/list-users.service';
 import { StorageMap } from '@ngx-pwa/local-storage';
 import { User } from '../../models/user';
-import { UserRole } from '../../models/userRole';
 import { ReimbursmentStatus } from '../../models/reimbursmentStatus';
-import { AppComponent } from 'src/app/app.component';
 import { ListReimbursmentStatusesService } from '../../services/list-reimbursment-statuses.service';
 
 @Component({
