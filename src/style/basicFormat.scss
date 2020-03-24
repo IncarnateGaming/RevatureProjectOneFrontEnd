@@ -22,6 +22,9 @@
 .ers-flex-grow{
     flex:1;
 }
+.ers-dynamic-flex-direction{
+    flex-direction: column;
+}
 //Responsive parts
 @media (min-width: 700px) and (orientation:landscape){
     #titleAbbreviation{
@@ -45,5 +48,12 @@
     }
     #navbarSupportedContent.expanded{
         display:flex;
+    }
+    #navbarSupportedContent > div > ul{
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+    .ers-dynamic-flex-direction{
+        flex-direction: row;
     }
 }

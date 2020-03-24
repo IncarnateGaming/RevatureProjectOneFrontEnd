@@ -18,6 +18,7 @@ export class AppComponent {
   ngOnInit():void{
     // @ts-ignore
     this.user = this.storage.get<User>('userLogin');
+    console.log(this.user);
   }
   logout() {
     this.storage.delete('userLogin').subscribe(() => {});

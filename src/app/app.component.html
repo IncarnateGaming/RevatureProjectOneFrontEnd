@@ -8,42 +8,49 @@
             </button>
         </div>
         <div class="text-light" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto my-3">
-                <li class="nav-item ml-auto">
+            <!-- <ul class="navbar-nav my-3">
+                <li class="nav-item">
                     <a routerLink="/dashboard"><button class="btn-light">Dashboard</button></a>
                 </li>
             </ul>
-            <ul class="navbar-nav ml-auto my-3">
-                <li class="nav-item ml-auto">
+            <ul class="navbar-nav my-3">
+                <li class="nav-item">
                     <a routerLink="/heroes"><button class="btn-light">Heroes</button></a>
                 </li>
-            </ul>
-            <ul class="navbar-nav ml-auto my-3">
-                <li class="nav-item ml-auto">
-                    <a routerLink="/ticket/list"><button class="btn-light">List Tickets</button></a>
-                </li>
-            </ul>
-            <ul class="navbar-nav ml-auto my-3">
-                <li class="nav-item ml-auto">
-                    <a routerLink="/ticket/new"><button class="btn-light">New Ticket</button></a>
-                </li>
-            </ul>
-            <ul class="navbar-nav ml-auto my-3">
-                <li class="nav-item ml-auto">
-                    <a routerLink="/login"><button class="btn-light">login</button></a>
-                </li>
-            </ul>
-            <ul class="navbar-nav ml-auto my-3" *ngIf="user">
-                <li class="nav-item ml-auto">
-                    <button class="btn-light" (click)="logout()">logout</button>
-                </li>
-            </ul>
-            <ul class="navbar-nav ml-auto my-3">
-                <li class="nav-item ml-auto">
+            </ul> -->
+            <ul class="navbar-nav my-3">
+                <li class="nav-item">
                     <a routerLink="/newaccount"><button class="btn-light">New Account</button></a>
                 </li>
             </ul>
-            <div id="loginDisplay"></div>
+            <div *ngIf="user | async as userx; else login" class="d-flex ers-flex-grow ers-dynamic-flex-direction">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a routerLink="/ticket/list"><button class="btn-light">List Tickets</button></a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a routerLink="/ticket/new"><button class="btn-light">New Ticket</button></a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <button class="btn-light" (click)="logout()">logout</button>
+                    </li>
+                </ul>
+                <span class="ml-auto ers-flex-grow my-auto py-1">Hi <span *ngIf="userx.firstName; else username">{{userx.firstName}} {{userx.lastName}}</span>!</span>
+                <ng-template #username>{{userx.username}}</ng-template>
+            </div>
+            <ng-template #login>
+                <div class="d-flex-grow ers-dynamic-flex-direction">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a routerLink="/login"><button class="btn-light">login</button></a>
+                        </li>
+                    </ul>
+                </div>
+            </ng-template>
         </div>
     </nav>
     <div class="container ers-flex-grow">
