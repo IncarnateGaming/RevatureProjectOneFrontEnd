@@ -13,7 +13,7 @@
     <div class="form-group">
         <label for="type">Type</label>
         <select class="form-control" id="type" [(ngModel)]="type" name="type">
-            <option *ngFor="let typee of types | async" [value]="typee | json">{{type.type}}</option>
+            <option *ngFor="let typee of types | async" [value]="typee | json">{{typee.type}}</option>
         </select>
     </div>
 </form>
