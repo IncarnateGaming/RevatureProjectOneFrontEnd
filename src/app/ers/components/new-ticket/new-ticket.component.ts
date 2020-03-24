@@ -6,7 +6,7 @@ import { ReimbursmentType } from '../../models/reimbursmentType';
 import { ListReimbursmentTypesService } from '../../services/list-reimbursment-types.service';
 import { StorageMap } from '@ngx-pwa/local-storage';
 import { Reimbursment } from '../../models/reimbursment';
-import { ReimbursmentStatus } from '../../models/reimbursmentStatus';
+import { ReimbursmentService } from '../../services/reimbursment.service';
 
 @Component({
   selector: 'app-new-ticket',
@@ -23,6 +23,7 @@ export class NewTicketComponent implements OnInit {
   constructor(
     private listReimbursmentTypesService: ListReimbursmentTypesService,
     private storage: StorageMap,
+    private reimbursmentService: ReimbursmentService,
   ) { }
 
   ngOnInit(): void {
@@ -36,9 +37,14 @@ export class NewTicketComponent implements OnInit {
       console.log("amount", this.amount, "description", this.description, "type", this.type);
       let type: ReimbursmentType = new ReimbursmentType("");
       if(this.type !== undefined && this.type !== ""){
-        status = JSON.parse(this.type);
+        type = JSON.parse(this.type);
       }
+      console.log(type);
       let reimbursment: Reimbursment = new Reimbursment(this.amount, this.description, this.receipt, res, type);
+      this.reimbursmentService.create(res, reimbursment)
+        .subscribe((result) => {
+          console.log(result);
+        })
     })
   }
 }
