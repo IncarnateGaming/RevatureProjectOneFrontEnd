@@ -1,1 +1,28 @@
-<p>edit-ticket works!</p>
+<div *ngIf="reimbursment | async as reimbursmentx">
+    <form class="mt-1">
+        <div class="form-group">
+            <label for="amount">Amount</label>
+            <input type="number" class="form-control" id="amount" [(ngModel)]="reimbursmentx.amount" name="amount"/>
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" class="form-control" id="description" [(ngModel)]="reimbursmentx.description" name="description"/>
+        </div>
+        <div class="form-group">
+            <label for="image">Image</label>
+        </div>
+        <div class="form-group">
+            <label for="type">Type</label>
+            <select class="form-control" id="type" [(ngModel)]="reimbursmentx.type" name="type">
+            <option *ngFor="let typee of types | async" [value]="typee | json">{{typee.type}}</option>
+                <!-- <ng-template *ngFor="let typee of types | async">
+                    <ng-template *ngIf="5">
+                        <option [value]="typee | json">{{typee.type}}</option>
+                    </ng-template>
+                    <ng-template #notSelected><option [value]="typee | json">{{typee.type}}</option></ng-template>
+                </ng-template> -->
+            </select>
+        </div>
+    </form>
+    <button class="btn btn-primary my-2" (click)="submit()">Update Reimbursment Request</button>
+</div>

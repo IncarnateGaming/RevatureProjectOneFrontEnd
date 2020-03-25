@@ -20,6 +20,7 @@ export class NewTicketComponent implements OnInit {
   type: string;
   receipt: ImageBitmap;
   types: Observable<ReimbursmentType[]>;
+  selectedFile: File;
   constructor(
     private listReimbursmentTypesService: ListReimbursmentTypesService,
     private storage: StorageMap,
@@ -38,13 +39,20 @@ export class NewTicketComponent implements OnInit {
       let type: ReimbursmentType = new ReimbursmentType("");
       if(this.type !== undefined && this.type !== ""){
         type = JSON.parse(this.type);
+        let reimbursment: Reimbursment = new Reimbursment(this.amount, this.description, this.receipt, res, type);
+        this.reimbursmentService.create(res, reimbursment)
+          .subscribe((result) => {
+            console.log(result);
+          })
+      }else{
+        alert("Type is a required field.");
       }
-      console.log(type);
-      let reimbursment: Reimbursment = new Reimbursment(this.amount, this.description, this.receipt, res, type);
-      this.reimbursmentService.create(res, reimbursment)
-        .subscribe((result) => {
-          console.log(result);
-        })
     })
+  }
+  onFileChanged(event){
+    this.selectedFile = event.target.files[0];
+  }
+  onUpload(){
+    console.log(this.selectedFile);
   }
 }

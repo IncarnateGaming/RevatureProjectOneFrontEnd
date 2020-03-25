@@ -33,29 +33,31 @@ export class TicketsComponent implements OnInit {
     // @ts-ignore
     this.user = this.storage.get<User>('userLogin');
     this.callReimbursments();
-    this.callUsers();
     this.callReimbursmentStatuses();
+    this.callUsers();
   }
   callReimbursmentStatuses(){
     this.reimbursmentStatuses = this.listReimbursmentStatusesService.sendListRequest();
   }
   callReimbursments() {
     this.storage.get<User>('userLogin').subscribe((res: User) => {
-      let filterByUser: User = new User("","","","","",{"id":0,"role":""});
-      if (this.filterBy !== undefined && this.filterBy !== ""){
-        filterByUser = JSON.parse(this.filterBy);
-      }
-      let status: ReimbursmentStatus = new ReimbursmentStatus("");
-      if(this.status !== undefined && this.status !== ""){
-        status = JSON.parse(this.status);
-      }
-      this.tickets =
-        this.listTicketsService.sendListRequest(res, filterByUser, this.limit, this.offset, status);
+      if(res){
+        let filterByUser: User = new User("","","","","",{"id":0,"role":""});
+        if (this.filterBy !== undefined && this.filterBy !== ""){
+          filterByUser = JSON.parse(this.filterBy);
+        }
+        let status: ReimbursmentStatus = new ReimbursmentStatus("");
+        if(this.status !== undefined && this.status !== ""){
+          status = JSON.parse(this.status);
+        }
+        this.tickets =
+          this.listTicketsService.sendListRequest(res, filterByUser, this.limit, this.offset, status);
+        }
     });
   }
   callUsers() {
     this.storage.get<User>('userLogin').subscribe((res: User) => {
-      if (res.role && res.role.role === 'Admin') {
+      if (res && res.role && res.role.role === 'Admin') {
         this.users =
           this.listUsersService.sendListRequest(res, 20, 0);
       }

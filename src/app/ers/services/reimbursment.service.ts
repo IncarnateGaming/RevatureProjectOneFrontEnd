@@ -19,7 +19,9 @@ export class ReimbursmentService {
   update(submitter:User, reimbursment:Reimbursment): Observable<Reimbursment>{
     return this.http.put<Reimbursment>(this.configUrl,{submitter:submitter, reimbursment:reimbursment});
   }
-  get(submitter:User, reimbursment:Reimbursment): Observable<Reimbursment>{
+  get(submitter:User, reimbursmentId: number): Observable<Reimbursment>{
+    let reimbursment: Reimbursment = new Reimbursment(0,"",undefined,{email:"",firstName:"",lastName:"",id:0,password:"",role:{id:0,role:""},username:""},{id:0,type:""});
+    reimbursment.id = reimbursmentId;
     return this.http.post<Reimbursment>(this.getUrl,{submitter:submitter, reimbursment:reimbursment});
   }
 }
