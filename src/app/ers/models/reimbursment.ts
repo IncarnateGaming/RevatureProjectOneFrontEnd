@@ -8,12 +8,12 @@ export class Reimbursment{
     description: string;
     submitted: Date;
     resolved: Date;
-    receipt: ImageBitmap;
+    receipt: Blob;
     author: User;
     resolver: User;
     status: ReimbursmentStatus;
     type: ReimbursmentType;
-    constructor(amount: number, description: string, receipt: ImageBitmap
+    constructor(amount: number, description: string, receipt: Blob 
         , author: User, type: ReimbursmentType){
             this.id = 0;
             this.amount = amount;

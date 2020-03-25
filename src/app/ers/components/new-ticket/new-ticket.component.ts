@@ -18,7 +18,7 @@ export class NewTicketComponent implements OnInit {
   amount: number;
   description: string;
   type: string;
-  receipt: ImageBitmap;
+  receipt: Blob;
   types: Observable<ReimbursmentType[]>;
   selectedFile: File;
   constructor(
@@ -40,6 +40,7 @@ export class NewTicketComponent implements OnInit {
       if(this.type !== undefined && this.type !== ""){
         type = JSON.parse(this.type);
         let reimbursment: Reimbursment = new Reimbursment(this.amount, this.description, this.receipt, res, type);
+        console.log(reimbursment);
         this.reimbursmentService.create(res, reimbursment)
           .subscribe((result) => {
             console.log(result);
@@ -54,5 +55,15 @@ export class NewTicketComponent implements OnInit {
   }
   onUpload(){
     console.log(this.selectedFile);
+    // console.log(this.blobToString(this.selectedFile));
+  }
+  blobToString(blob: Blob): string{
+    var url, xml;
+    url = URL.createObjectURL(blob);
+    xml = new XMLHttpRequest();
+    xml.open('GET',url,false);
+    xml.send();
+    URL.revokeObjectURL(url);
+    return xml.responseText;
   }
 }

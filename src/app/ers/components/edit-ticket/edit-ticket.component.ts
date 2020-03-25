@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { Observable, forkJoin } from 'rxjs';
+import { switchMap, map } from 'rxjs/operators';
 import { FormsModule } from '@angular/forms';
 import { User } from '../../models/user';
 import { ReimbursmentType } from '../../models/reimbursmentType';
@@ -9,6 +9,7 @@ import { StorageMap } from '@ngx-pwa/local-storage';
 import { Reimbursment } from '../../models/reimbursment';
 import { ReimbursmentService } from '../../services/reimbursment.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
+import { SafeUrl, DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-edit-ticket',
@@ -16,13 +17,17 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
   styleUrls: ['./edit-ticket.component.sass']
 })
 export class EditTicketComponent implements OnInit {
+  user = this.storage.get<User>('userLogin');
   reimbursment: Observable<Reimbursment>;
   types: Observable<ReimbursmentType[]>;
+  receiptURL: SafeUrl;
+  receipt: File;
   constructor(
     private listReimbursmentTypesService: ListReimbursmentTypesService,
     private storage: StorageMap,
     private reimbursmentService: ReimbursmentService,
     private route: ActivatedRoute,
+    private sanitizer: DomSanitizer,
   ) { }
 
   ngOnInit(): void {
@@ -33,10 +38,40 @@ export class EditTicketComponent implements OnInit {
           this.reimbursmentService.get(res,+params.get('id'))))
     });
   }
+  sanitizeReceipt(){
+    this.reimbursment.subscribe((res)=>{
+      if(this.receipt != undefined){
+        let url = URL.createObjectURL(this.receipt);
+        this.receiptURL = this.sanitizer.bypassSecurityTrustUrl(url);
+      }
+    });
+  }
   callReimbursmentTypes(){
     this.types = this.listReimbursmentTypesService.sendListRequest();
   }
   submit(){
   }
-
+  onFileChanged(event){
+    this.reimbursment.subscribe((res)=>{
+      this.receipt = event.target.files[0];
+      console.log(this.receipt);
+      this.sanitizeReceipt();
+    });
+  }
+  onUpload(){
+    this.reimbursment.subscribe((res)=>{
+      console.log("made it");
+      console.log(this.receipt);
+    });
+    // console.log(this.blobToString(this.selectedFile));
+  }
+  blobToString(blob: Blob): string{
+    var url, xml;
+    url = URL.createObjectURL(blob);
+    xml = new XMLHttpRequest();
+    xml.open('GET',url,false);
+    xml.send();
+    URL.revokeObjectURL(url);
+    return xml.responseText;
+  }
 }

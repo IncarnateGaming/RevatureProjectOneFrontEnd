@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 export class ReimbursmentService {
   configUrl = "http://localhost:8080/PhilipLawrence1Expenses/Reimbursment";
   getUrl = "http://localhost:8080/PhilipLawrence1Expenses/ReimbursmentGet";
+  blobUrl = "http://localhost:8080/PhilipLawrence1Expenses/ReimbursmentBlob";
   constructor(
     private http: HttpClient,
   ) { }
@@ -23,5 +24,20 @@ export class ReimbursmentService {
     let reimbursment: Reimbursment = new Reimbursment(0,"",undefined,{email:"",firstName:"",lastName:"",id:0,password:"",role:{id:0,role:""},username:""},{id:0,type:""});
     reimbursment.id = reimbursmentId;
     return this.http.post<Reimbursment>(this.getUrl,{submitter:submitter, reimbursment:reimbursment});
+  }
+  updateReceipt(submitter:User, reimbursmentId: number, blob: File){
+    return this.http.put(this.blobUrl,
+      blob,
+      {
+        headers:{
+          "Content-Type":blob.type,
+        },
+        params:{
+          submitter: JSON.stringify(submitter),
+          mimeType: blob.type,
+          reimbursmentId: reimbursmentId.toString(),
+        }
+      }
+      )
   }
 }
