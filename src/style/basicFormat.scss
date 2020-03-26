@@ -1,7 +1,7 @@
 @use 'sass:map';
-@import 'style/incarnateColors.scss';
+@import 'incarnateColors.scss';
 .headerBar{
-    width: calc(100vw - 2rem);
+    width: calc(100vw - 3rem);
 }
 #titleMain{
     display:none;
@@ -24,6 +24,13 @@
 }
 .ers-dynamic-flex-direction{
     flex-direction: column;
+}
+.ers-image{
+    max-width: 70vw;
+    max-height: 70vh;
+    margin-left: auto;
+    margin-right: auto;
+    display:block;
 }
 //Responsive parts
 @media (min-width: 700px) and (orientation:landscape){

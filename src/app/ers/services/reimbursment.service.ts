@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { User } from '../models/user';
 import { Reimbursment } from '../models/reimbursment';
 import { Observable } from 'rxjs';
@@ -8,9 +8,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ReimbursmentService {
-  configUrl = "http://localhost:8080/PhilipLawrence1Expenses/Reimbursment";
-  getUrl = "http://localhost:8080/PhilipLawrence1Expenses/ReimbursmentGet";
-  blobUrl = "http://localhost:8080/PhilipLawrence1Expenses/ReimbursmentBlob";
+  private configUrl = "http://localhost:8080/PhilipLawrence1Expenses/Reimbursment";
+  private getUrl = "http://localhost:8080/PhilipLawrence1Expenses/ReimbursmentGet";
+  private blobUrl = "http://localhost:8080/PhilipLawrence1Expenses/ReimbursmentBlob";
   constructor(
     private http: HttpClient,
   ) { }
@@ -25,7 +25,20 @@ export class ReimbursmentService {
     reimbursment.id = reimbursmentId;
     return this.http.post<Reimbursment>(this.getUrl,{submitter:submitter, reimbursment:reimbursment});
   }
-  updateReceipt(submitter:User, reimbursmentId: number, blob: File){
+  getReceipt(submitter, reimbursmentId): Observable<any>{
+    console.log(submitter);
+    return this.http.post<any>(this.blobUrl,
+      "",
+      {
+        params:{
+          submitter: JSON.stringify(submitter),
+          reimbursmentId: reimbursmentId.toString(),
+        },
+        observer: 'response',
+        responseType: 'blob',
+      });
+  }
+  updateReceipt(submitter, reimbursmentId: number, blob: File){
     return this.http.put(this.blobUrl,
       blob,
       {

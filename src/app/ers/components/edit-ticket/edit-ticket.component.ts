@@ -22,6 +22,7 @@ export class EditTicketComponent implements OnInit {
   types: Observable<ReimbursmentType[]>;
   receiptURL: SafeUrl;
   receipt: File;
+  retrievedReceiptURL: Blob;
   constructor(
     private listReimbursmentTypesService: ListReimbursmentTypesService,
     private storage: StorageMap,
@@ -36,6 +37,18 @@ export class EditTicketComponent implements OnInit {
       this.reimbursment = this.route.paramMap.pipe(
         switchMap((params:ParamMap)=>
           this.reimbursmentService.get(res,+params.get('id'))))
+    });
+  }
+  retrieve(){
+    console.log("retrieve!");
+    this.reimbursment.subscribe((reimbursment)=>{
+      this.user.subscribe((user)=>{
+        console.log(user);
+        this.reimbursmentService.getReceipt(user, reimbursment.id).subscribe((result: Blob)=>{
+          console.log(result);
+          this.retrievedReceiptURL = result;
+        })
+      });
     });
   }
   sanitizeReceipt(){
@@ -59,9 +72,13 @@ export class EditTicketComponent implements OnInit {
     });
   }
   onUpload(){
-    this.reimbursment.subscribe((res)=>{
+    this.reimbursment.subscribe((reimbursment)=>{
       console.log("made it");
       console.log(this.receipt);
+      this.user.subscribe((user)=>{
+        this.reimbursmentService.updateReceipt(user, reimbursment.id, this.receipt).subscribe((result)=>
+        console.log(result));
+      })
     });
     // console.log(this.blobToString(this.selectedFile));
   }
