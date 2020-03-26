@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { StorageMap } from '@ngx-pwa/local-storage';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'app-manage-ticket',
@@ -7,7 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ManageTicketComponent implements OnInit {
 
-  constructor() { }
+  user = this.storage.get<User>('userLogin');
+  constructor(
+    private storage: StorageMap,
+  ) { }
 
   ngOnInit(): void {
   }

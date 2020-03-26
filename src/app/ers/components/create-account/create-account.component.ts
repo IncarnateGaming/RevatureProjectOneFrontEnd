@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { NewAccountService } from '../../services/new-account.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-account',
@@ -16,6 +17,7 @@ export class CreateAccountComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private newAccount: NewAccountService, 
+    private router: Router,
   ) {
     this.newAccountForm = this.formBuilder.group({
       username:'',
@@ -32,7 +34,8 @@ export class CreateAccountComponent implements OnInit {
     if(newAccountForm.password === newAccountForm.password2){
       let result = this.newAccount.create(newAccountForm.username, newAccountForm.password, newAccountForm.email)
         .subscribe(result => {
-          console.log(result);
+          alert(result.username + " created!");
+            this.router.navigate(['/ticket/new/']);
         });
     }else{
       alert('Passwords do not match!');

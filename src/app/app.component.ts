@@ -20,6 +20,8 @@ export class AppComponent {
     this.user = this.storage.get<User>('userLogin');
   }
   logout() {
-    this.storage.delete('userLogin').subscribe(() => {});
+    this.storage.delete('userLogin').subscribe(() => {
+      location.reload();
+    });
   }
 }

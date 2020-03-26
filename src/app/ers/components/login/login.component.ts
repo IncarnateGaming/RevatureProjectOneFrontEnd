@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { LoginService } from '../../services/login.service';
 import { StorageMap } from '@ngx-pwa/local-storage';
+import { User } from '../../models/user';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -10,6 +12,7 @@ import { StorageMap } from '@ngx-pwa/local-storage';
 })
 export class LoginComponent implements OnInit {
 
+  user = this.storage.get<User>('userLogin');
   loginForm;
   constructor(
     private formBuilder: FormBuilder,
@@ -27,9 +30,9 @@ export class LoginComponent implements OnInit {
   onSubmit(loginTemplate){
     let result = this.login.sendLogin(loginTemplate.username, loginTemplate.password)
       .subscribe(result => {
-        this.storage.set('userLogin',result).subscribe(()=>{});
-        console.log(result);
-        // this.storage.get('userLogin').subscribe((res) =>{console.log(res);});
+        this.storage.set('userLogin',result).subscribe(()=>{
+          location.reload();
+        });
       });
   }
 

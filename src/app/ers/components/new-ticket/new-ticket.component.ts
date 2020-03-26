@@ -7,6 +7,7 @@ import { ListReimbursmentTypesService } from '../../services/list-reimbursment-t
 import { StorageMap } from '@ngx-pwa/local-storage';
 import { Reimbursment } from '../../models/reimbursment';
 import { ReimbursmentService } from '../../services/reimbursment.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-ticket',
@@ -15,6 +16,7 @@ import { ReimbursmentService } from '../../services/reimbursment.service';
 })
 export class NewTicketComponent implements OnInit {
 
+  user = this.storage.get<User>('userLogin');
   amount: number;
   description: string;
   type: string;
@@ -25,6 +27,7 @@ export class NewTicketComponent implements OnInit {
     private listReimbursmentTypesService: ListReimbursmentTypesService,
     private storage: StorageMap,
     private reimbursmentService: ReimbursmentService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -40,10 +43,10 @@ export class NewTicketComponent implements OnInit {
       if(this.type !== undefined && this.type !== ""){
         type = JSON.parse(this.type);
         let reimbursment: Reimbursment = new Reimbursment(this.amount, this.description, this.receipt, res, type);
-        console.log(reimbursment);
         this.reimbursmentService.create(res, reimbursment)
           .subscribe((result) => {
             console.log(result);
+            this.router.navigate(['/ticket/edit/', result.id]);
           })
       }else{
         alert("Type is a required field.");
