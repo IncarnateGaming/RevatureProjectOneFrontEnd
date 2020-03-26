@@ -7,7 +7,7 @@ import {Observable, of} from 'rxjs';
   providedIn: 'root'
 })
 export class NewAccountService {
-  configUrl='http://localhost:8080/PhilipLawrence1Expenses/NewAccount';
+  configUrl='http://localhost:8080/ers/NewAccount';
   constructor(
     private http: HttpClient,
   ) { }

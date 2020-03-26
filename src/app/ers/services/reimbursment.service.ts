@@ -8,9 +8,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ReimbursmentService {
-  private configUrl = "http://localhost:8080/PhilipLawrence1Expenses/Reimbursment";
-  private getUrl = "http://localhost:8080/PhilipLawrence1Expenses/ReimbursmentGet";
-  private blobUrl = "http://localhost:8080/PhilipLawrence1Expenses/ReimbursmentBlob";
+  private configUrl = "http://localhost:8080/ers/Reimbursment";
+  private getUrl = "http://localhost:8080/ers/ReimbursmentGet";
+  private blobUrl = "http://localhost:8080/ers/ReimbursmentBlob";
   constructor(
     private http: HttpClient,
   ) { }
@@ -34,11 +34,10 @@ export class ReimbursmentService {
           submitter: JSON.stringify(submitter),
           reimbursmentId: reimbursmentId.toString(),
         },
-        observer: 'response',
-        responseType: 'blob',
       });
   }
   updateReceipt(submitter, reimbursmentId: number, blob: File){
+    console.log(blob.type);
     return this.http.put(this.blobUrl,
       blob,
       {

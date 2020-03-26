@@ -14,7 +14,7 @@ import { PokebadgeComponent } from './pokemon/components/pokebadge/pokebadge.com
 import { PageNotFoundComponent } from './ers/components/page-not-found/page-not-found.component';
 
 const routes: Routes = [
-  {path: '', component: DashboardComponent, pathMatch: 'full'},
+  {path: '', component: TicketsComponent, pathMatch: 'full'},
   {path: 'newaccount', component: CreateAccountComponent},
   {path: 'dashboard', component: DashboardComponent},
   {path: 'detail/:id', component: HeroDetailComponent},

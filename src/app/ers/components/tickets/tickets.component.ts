@@ -52,7 +52,7 @@ export class TicketsComponent implements OnInit {
         }
         this.tickets =
           this.listTicketsService.sendListRequest(res, filterByUser, this.limit, this.offset, status);
-        }
+        };
     });
   }
   callUsers() {

@@ -7,7 +7,7 @@ import {Observable, of} from 'rxjs';
   providedIn: 'root'
 })
 export class ListReimbursmentTypesService {
-  configUrl='http://localhost:8080/PhilipLawrence1Expenses/ReimbursmentTypeList';
+  configUrl='http://localhost:8080/ers/ReimbursmentTypeList';
   constructor(
     private http: HttpClient,
   ) { }
