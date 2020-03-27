@@ -43,11 +43,14 @@ export class EditTicketComponent implements OnInit {
     this.reimbursment.subscribe((reimbursment)=>{
       this.user.subscribe((user)=>{
         console.log(user);
-        this.reimbursmentService.getReceipt(user, reimbursment.id);
-        // .subscribe((result: Blob)=>{
-        //   console.log(result);
-        //   this.retrievedReceiptURL = result;
-        // })
+        this.reimbursmentService.getReceipt(user, reimbursment.id)
+        .subscribe((result)=>{
+          console.log(result);
+          let sanUrl = this.sanitizer.bypassSecurityTrustHtml(result);
+          console.log(sanUrl);
+          this.receiptURL = sanUrl;
+          // this.retrievedReceiptURL = result;
+        })
       });
     });
   }
@@ -55,7 +58,9 @@ export class EditTicketComponent implements OnInit {
     this.reimbursment.subscribe((res)=>{
       if(this.receipt != undefined){
         let url = URL.createObjectURL(this.receipt);
-        this.receiptURL = this.sanitizer.bypassSecurityTrustUrl(url);
+        let sanUrl = this.sanitizer.bypassSecurityTrustUrl(url);
+        console.log(sanUrl);
+        this.receiptURL = sanUrl;
       }
     });
   }
@@ -71,8 +76,9 @@ export class EditTicketComponent implements OnInit {
       console.log("made it");
       console.log(this.receipt);
       this.user.subscribe((user)=>{
-        this.reimbursmentService.updateReceipt(user, reimbursment.id, this.receipt).subscribe((result)=>
-        console.log(result));
+        this.reimbursmentService.updateReceipt(user, reimbursment.id, this.receipt);
+        // .subscribe((result)=>
+        // console.log(result));
       })
     });
     // console.log(this.blobToString(this.selectedFile));
