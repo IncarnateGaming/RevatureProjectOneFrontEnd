@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, forkJoin } from 'rxjs';
-import { switchMap, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import { FormsModule } from '@angular/forms';
 import { User } from '../../models/user';
 import { ReimbursmentType } from '../../models/reimbursmentType';

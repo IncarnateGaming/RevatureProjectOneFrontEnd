@@ -19,6 +19,7 @@ import { CreateAccountComponent } from './ers/components/create-account/create-a
 import { PageNotFoundComponent } from './ers/components/page-not-found/page-not-found.component';
 import { PokebadgeComponent } from './pokemon/components/pokebadge/pokebadge.component';
 import { PokedexComponent } from './pokemon/components/pokedex/pokedex.component';
+import { JsonStringifyPipe } from './ers/pipes/json-stringify.pipe';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { PokedexComponent } from './pokemon/components/pokedex/pokedex.component
     ManageTicketComponent,
     PageNotFoundComponent,
     PokebadgeComponent,
-    PokedexComponent
+    PokedexComponent,
+    JsonStringifyPipe,
   ],
   imports: [
     CommonModule,
