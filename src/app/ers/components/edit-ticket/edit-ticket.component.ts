@@ -39,17 +39,14 @@ export class EditTicketComponent implements OnInit {
     });
   }
   retrieve(){
-    console.log("retrieve!");
     this.reimbursment.subscribe((reimbursment)=>{
       this.user.subscribe((user)=>{
-        console.log(user);
         this.reimbursmentService.getReceipt(user, reimbursment.id)
         .subscribe((result)=>{
-          console.log(result);
           let sanUrl = this.sanitizer.bypassSecurityTrustHtml(result);
           console.log(sanUrl);
-          this.receiptURL = sanUrl;
-          // this.retrievedReceiptURL = result;
+          let image = <HTMLImageElement> document.getElementById("receiptImage");
+          image.src = (<any>sanUrl).changingThisBreaksApplicationSecurity;
         })
       });
     });

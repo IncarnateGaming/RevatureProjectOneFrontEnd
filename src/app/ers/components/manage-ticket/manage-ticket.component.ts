@@ -8,6 +8,7 @@ import { ListReimbursmentStatusesService } from '../../services/list-reimbursmen
 import { Reimbursment } from '../../models/reimbursment';
 import { switchMap } from 'rxjs/operators';
 import { ReimbursmentStatus } from '../../models/reimbursmentStatus';
+import { SafeUrl, DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-manage-ticket',
@@ -25,19 +26,27 @@ export class ManageTicketComponent implements OnInit {
     private listReimbursmentStatusesService: ListReimbursmentStatusesService,
     private reimbursmentService: ReimbursmentService,
     private route: ActivatedRoute,
+    private sanitizer: DomSanitizer,
   ) { }
 
   ngOnInit(): void {
     this.statuses = this.listReimbursmentStatusesService.sendListRequest();
-    this.storage.get<User>('userLogin').subscribe((res: User) => {
+    this.storage.get<User>('userLogin').subscribe((user: User) => {
       this.reimbursment = this.route.paramMap.pipe(
         switchMap((params:ParamMap)=>
-          this.reimbursmentService.get(res,+params.get('id'))
+          this.reimbursmentService.get(user,+params.get('id'))
           ));
       this.reimbursment.subscribe((reimbursment)=>{
         this.statuses.subscribe((statuses)=>{
           this.status = <HTMLSelectElement> document.getElementById('status');
           this.status.value = JSON.stringify(reimbursment.status);
+        })
+        this.reimbursmentService.getReceipt(user, reimbursment.id)
+        .subscribe((result)=>{
+          let sanUrl = this.sanitizer.bypassSecurityTrustHtml(result);
+          console.log(sanUrl);
+          let image = <HTMLImageElement> document.getElementById("receiptImage");
+          image.src = (<any>sanUrl).changingThisBreaksApplicationSecurity;
         })
       })
     });

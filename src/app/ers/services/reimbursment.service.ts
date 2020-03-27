@@ -41,7 +41,6 @@ export class ReimbursmentService {
           console.log(blob);
           var urlCreator = window.URL || window.webkitURL;
           var imageURL = urlCreator.createObjectURL(blob);
-          console.log(imageURL);
           const image = <HTMLImageElement> document.getElementById("receiptImage");
           observer.next(imageURL);
         }

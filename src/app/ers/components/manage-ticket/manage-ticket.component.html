@@ -1,6 +1,7 @@
 <div *ngIf="user | async as userx; else login">
     <div *ngIf="reimbursment | async as reimbursmentx">
         <form>
+            <img id="receiptImage" class="ers-image" src=""/>
             <div class="form-group">
                 <label>Amount</label>
                 <div class="form-control">{{reimbursmentx.amount | currency : 'USD'}}</div>
