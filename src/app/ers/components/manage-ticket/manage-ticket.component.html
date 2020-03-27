@@ -1,4 +1,5 @@
-<div *ngIf="user | async as userx; else login">
+<div *ngIf="user | async as userx ; else login">
+    <div *ngIf="userx.role.role == 'Admin';  else denied">
     <div *ngIf="reimbursment | async as reimbursmentx">
         <form>
             <img id="receiptImage" class="ers-image" src=""/>
@@ -31,5 +32,9 @@
         </form>
         <button class="btn btn-primary my-2" (click)="submit()">Update Reimbursment Request</button>
     </div>
+    </div>
+    <ng-template #denied>
+        <h1>Access Denied</h1>
+    </ng-template>
 </div>
 <ng-template #login><app-login></app-login></ng-template>

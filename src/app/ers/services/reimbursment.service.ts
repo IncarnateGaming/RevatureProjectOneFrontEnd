@@ -38,10 +38,10 @@ export class ReimbursmentService {
       xhr.addEventListener('load',function(){
         if (xhr.status === 200){
           var blob = new Blob([xhr.response],{type:"image/jpeg"});
-          console.log(blob);
+          var file = new File([blob],  "receipt.jpg");
+          console.log(file);
           var urlCreator = window.URL || window.webkitURL;
-          var imageURL = urlCreator.createObjectURL(blob);
-          const image = <HTMLImageElement> document.getElementById("receiptImage");
+          var imageURL = urlCreator.createObjectURL(file);
           observer.next(imageURL);
         }
       })
@@ -101,9 +101,7 @@ export class ReimbursmentService {
     xhr.responseType = 'text';
     xhr.addEventListener('load',function(){
       if (xhr.status === 201){
-        console.log("201 response");
-        console.log(this.responseText);
-        console.log(xhr.response);
+        alert("Updated image");
       }
     })
     xhr.send(blob);

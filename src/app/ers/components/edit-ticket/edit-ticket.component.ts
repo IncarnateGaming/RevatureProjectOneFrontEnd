@@ -70,8 +70,6 @@ export class EditTicketComponent implements OnInit {
   }
   onUpload(){
     this.reimbursment.subscribe((reimbursment)=>{
-      console.log("made it");
-      console.log(this.receipt);
       this.user.subscribe((user)=>{
         this.reimbursmentService.updateReceipt(user, reimbursment.id, this.receipt);
         // .subscribe((result)=>
