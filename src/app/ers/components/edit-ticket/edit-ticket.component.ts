@@ -32,7 +32,6 @@ export class EditTicketComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.callReimbursmentTypes();
     this.storage.get<User>('userLogin').subscribe((res: User) => {
       this.reimbursment = this.route.paramMap.pipe(
         switchMap((params:ParamMap)=>
@@ -44,10 +43,11 @@ export class EditTicketComponent implements OnInit {
     this.reimbursment.subscribe((reimbursment)=>{
       this.user.subscribe((user)=>{
         console.log(user);
-        this.reimbursmentService.getReceipt(user, reimbursment.id).subscribe((result: Blob)=>{
-          console.log(result);
-          this.retrievedReceiptURL = result;
-        })
+        this.reimbursmentService.getReceipt(user, reimbursment.id);
+        // .subscribe((result: Blob)=>{
+        //   console.log(result);
+        //   this.retrievedReceiptURL = result;
+        // })
       });
     });
   }
@@ -58,11 +58,6 @@ export class EditTicketComponent implements OnInit {
         this.receiptURL = this.sanitizer.bypassSecurityTrustUrl(url);
       }
     });
-  }
-  callReimbursmentTypes(){
-    this.types = this.listReimbursmentTypesService.sendListRequest();
-  }
-  submit(){
   }
   onFileChanged(event){
     this.reimbursment.subscribe((res)=>{

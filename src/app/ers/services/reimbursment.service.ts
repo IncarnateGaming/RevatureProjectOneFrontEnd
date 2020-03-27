@@ -25,16 +25,43 @@ export class ReimbursmentService {
     reimbursment.id = reimbursmentId;
     return this.http.post<Reimbursment>(this.getUrl,{submitter:submitter, reimbursment:reimbursment});
   }
-  getReceipt(submitter, reimbursmentId): Observable<any>{
-    console.log(submitter);
-    return this.http.post<any>(this.blobUrl,
-      "",
-      {
-        params:{
-          submitter: JSON.stringify(submitter),
-          reimbursmentId: reimbursmentId.toString(),
-        },
-      });
+  getReceipt(submitter, reimbursmentId){
+    let url: any = new URL(this.blobUrl);
+    url.searchParams.set('submitter',JSON.stringify(submitter));
+    url.searchParams.set('reimbursmentid',reimbursmentId.toString())
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", url, true);
+    xhr.responseType = 'blob';
+    xhr.addEventListener('load',function(){
+      if (xhr.status === 200){
+        const image = <HTMLImageElement> document.getElementById("receiptImage");
+        if(image != undefined){
+          var blob = new Blob([xhr.response],{type:"image/jpeg"});
+          var urlCreator = window.URL || window.webkitURL;
+          var imageURL = urlCreator.createObjectURL(blob);
+          image.src = imageURL;
+        }
+      }
+    })
+    xhr.send();
+    // console.log(submitter);
+    // const options = {
+    //   headers?:{}, 
+    //   observe?: 'body',
+    //   params:{
+    //     submitter: JSON.stringify(submitter),
+    //     reimbursmentId: reimbursmentId.toString(),
+    //   }, 
+    //   responseType: 'text' as 'text'} = {
+    //     headers: {},
+    //     params: {
+    //       submitter: JSON.stringify(submitter),
+    //       reimbursmentId: reimbursmentId.toString(),
+    //     },
+    //     responseType: 'text'
+    //   };
+    // return this.http.get<any>(this.blobUrl,
+    //   options);
   }
   updateReceipt(submitter, reimbursmentId: number, blob: File){
     console.log(blob.type);

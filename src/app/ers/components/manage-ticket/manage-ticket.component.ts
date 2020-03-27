@@ -46,8 +46,9 @@ export class ManageTicketComponent implements OnInit {
     this.reimbursment.subscribe((reimbursment)=>{
       this.storage.get<User>('userLogin').subscribe((res: User) => {
         reimbursment.status = JSON.parse(this.status.value);
+        reimbursment.resolver = res;
         this.reimbursmentService.update(res, reimbursment).subscribe(()=>{
-          location.reload();
+          alert("Reimbursment Processed");
         });
       });
     });
