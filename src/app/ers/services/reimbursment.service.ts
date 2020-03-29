@@ -37,6 +37,7 @@ export class ReimbursmentService {
       xhr.responseType = 'blob';
       xhr.addEventListener('load',function(){
         if (xhr.status === 200){
+          console.log(xhr.response);
           var blob = new Blob([xhr.response],{type:"image/jpeg"});
           var file = new File([blob],  "receipt.jpg");
           console.log(file);
@@ -48,49 +49,6 @@ export class ReimbursmentService {
       xhr.send();
     })
     return observable;
-    /**====================== */
-    // let url: any = new URL(this.blobUrl);
-    // url.searchParams.set('submitter',JSON.stringify(submitter));
-    // url.searchParams.set('reimbursmentid',reimbursmentId.toString())
-    // var xhr = new XMLHttpRequest();
-    // xhr.open("GET", url, true);
-    // xhr.responseType = 'blob';
-    // xhr.addEventListener('load',function(){
-    //   if (xhr.status === 200){
-    //     const image = <HTMLImageElement> document.getElementById("receiptImage");
-    //     if(image != undefined){
-    //       var blob = new Blob([xhr.response],{type:"image/jpeg"});
-    //       console.log(blob);
-    //       var urlCreator = window.URL || window.webkitURL;
-    //       var imageURL = urlCreator.createObjectURL(blob);
-    //       console.log(imageURL);
-    //       const image = <HTMLImageElement> document.getElementById("receiptImage");
-    //       // var safeURL: any = sanitizer.bypassSecurityTrustUrl(imageURL);
-    //       // console.log(safeURL);
-    //       image.src = imageURL;
-    //     }
-    //   }
-    // })
-    // xhr.send();
-    /*======================*/
-    // console.log(submitter);
-    // const options = {
-    //   headers?:{}, 
-    //   observe?: 'body',
-    //   params:{
-    //     submitter: JSON.stringify(submitter),
-    //     reimbursmentId: reimbursmentId.toString(),
-    //   }, 
-    //   responseType: 'text' as 'text'} = {
-    //     headers: {},
-    //     params: {
-    //       submitter: JSON.stringify(submitter),
-    //       reimbursmentId: reimbursmentId.toString(),
-    //     },
-    //     responseType: 'text'
-    //   };
-    // return this.http.get<any>(this.blobUrl,
-    //   options);
   }
   updateReceipt(submitter, reimbursmentId: number, blob: File){
     let url: any = new URL(this.blobUrl);
@@ -105,19 +63,5 @@ export class ReimbursmentService {
       }
     })
     xhr.send(blob);
-    // console.log(blob.type);
-    // return this.http.put(this.blobUrl,
-    //   blob,
-    //   {
-    //     headers:{
-    //       "Content-Type":blob.type,
-    //     },
-    //     params:{
-    //       submitter: JSON.stringify(submitter),
-    //       mimeType: blob.type,
-    //       reimbursmentId: reimbursmentId.toString(),
-    //     }
-    //   }
-    //   )
   }
 }
